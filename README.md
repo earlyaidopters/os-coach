@@ -103,6 +103,71 @@ Everything lands in the folder you run it in, so the folder *is* the OS:
 
 ---
 
+## A worked example
+
+Here is a real run, condensed. A solo wedding photographer wants to stop missing deadlines. Clients are shown as `Couple A`, `Couple B` because the photographer flagged client names as sensitive, so the coach stores non-identifying handles instead of real names.
+
+**You:**
+
+```
+/os-coach start I keep missing client deadlines and want to never miss a delivery date again
+```
+
+OS Coach confirms the goal, sets up the folder, and asks three short questions, who it is for, the one question you wish you could just ask it, and one thing it should always do plus one it should never do. You answer: just me; "what is due in the next 10 days and what am I already late on"; always warn me within 3 days of a contracted date; never message a client without my approval. It then writes your Identity file:
+
+```markdown
+# Who I am
+I am the operating system for a solo wedding photographer. I exist so no client deliverable is ever late.
+...
+## Hard refusals (never)
+- I never message a client without you reading and approving it first.
+- I never let a deadline pass quietly. If something is at risk, I surface it loudly.
+```
+
+**You:** `/os-coach next`
+
+It opens Substrate, asks where your bookings live and what is sensitive, then builds a tracker that computes both deadlines from each wedding date (sneak peek is wedding plus 1 week, full gallery is wedding plus 6 weeks) and answers your question on the spot:
+
+```
+Within 3 days, your always-warn line just tripped:
+- Couple B, full gallery due 2026-07-01 (3 days away)
+
+Coming due within 10 days:
+- Couple C, sneak peek due 2026-07-02 (4 days out)
+```
+
+**You:** `/os-coach audit`
+
+```
+## Scorecard
+| Layer     | Score   | Why |
+|-----------|---------|-----|
+| Identity  | Solid   | CLAUDE.md states the mission and two refusals. |
+| Substrate | Started | Tracker answers "due soon" but not "already late" until you mark what shipped. |
+| Rules     | Missing | Client handles now live in the folder with nothing stopping a public backup. |
+
+## The three moves that matter most
+1. Rules: write rules/never.md (never back this folder up publicly). A leak cannot be undone, and a gallery is due in 3 days.
+2. Substrate: mark which galleries shipped so "due soon" can also answer "already late".
+3. Skills: turn the deadline check into one repeatable command.
+```
+
+Your folder now looks like this:
+
+```
+photo-os/
+  CLAUDE.md          # Identity, the soul
+  memory.md          # where you left off
+  substrate/
+    sources.md       # where the real data lives
+    compendium.md    # the deadline tracker
+  OS-AUDIT.md        # the latest scorecard
+```
+
+Every file is real, grounded in your goal, and yours to keep.
+
+---
+
 ## How it is built
 
 - `SKILL.md`, the controller. It is user-invoked only, holds the golden rules (talk like a human, one small step at a time, you do the building, never be generic, always persist, protect sensitive data, no em dashes), the guards, and the per-flow logic.
